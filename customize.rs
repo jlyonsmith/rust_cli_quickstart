@@ -11,6 +11,7 @@
 
 use colored::*;
 use dialoguer::{Confirm, Input};
+use duct::cmd;
 use handlebars::Handlebars;
 use inflector::Inflector;
 use map_macro::map;
@@ -139,20 +140,20 @@ impl Customizer {
             .with_prompt("Delete customization scripts?")
             .interact()?
         {
-            fs::remove_file("customize.rs");
+            fs::remove_file("customize.rs")?;
         }
 
         if Confirm::new()
             .with_prompt("Reinitialize Git repo?")
             .interact()?
         {
-            fs::remove_dir_all(".git");
+            fs::remove_dir_all(".git")?;
             cmd!("git", "init").run()?;
             cmd!("git", "add", "-A", ":/").run()?;
             cmd!("git", "commit", "-m", "'Initial commit'").run()?;
         }
 
-        self.info("Customization complete");
+        Self::info("Customization complete");
 
         Ok(())
     }
