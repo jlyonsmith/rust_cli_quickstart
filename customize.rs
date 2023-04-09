@@ -48,6 +48,7 @@ impl Customizer {
         let project_name_snake = project_name.to_snake_case();
         let project_name_pascal = project_name.to_pascal_case();
         let project_name_title = project_name.to_title_case();
+        let project_name_kebab = project_name.to_kebab_case();
         let old_bin_path = "src/bin/rust_cli_quickstart.rs";
         let bin_path = format!("src/bin/{}.rs", &project_name.to_snake_case());
         let lib_path = "src/lib.rs";
@@ -81,6 +82,7 @@ impl Customizer {
             &cargo_toml_path,
             fs::read_to_string(&cargo_toml_path)?
                 .replace("rust_cli_quickstart", &project_name_snake)
+                .replace("rust-cli-quickstart", &project_name_kebab)
                 .replace("RustCliQuickStart", &project_name_pascal),
         )?;
 
