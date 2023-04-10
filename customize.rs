@@ -152,7 +152,7 @@ impl Customizer {
             fs::remove_dir_all(".git")?;
             cmd!("git", "init").run()?;
             cmd!("git", "add", "-A", ":/").run()?;
-            cmd!("git", "commit", "-m", "'Initial commit'").run()?;
+            cmd!("git", "commit", "-m", "Initial commit").run()?;
         }
 
         Self::info("Customization complete");

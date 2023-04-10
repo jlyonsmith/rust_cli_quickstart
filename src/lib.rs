@@ -23,11 +23,11 @@ pub struct RustCliQuickStartTool<'a> {
 #[derive(Parser)]
 #[clap(version, about, long_about = None)]
 struct Cli {
-    /// The JSON5 input file
+    /// The input file
     #[arg(value_name = "INPUT_FILE")]
     input_file: Option<PathBuf>,
 
-    /// The SVG output file
+    /// The output file
     #[arg(value_name = "OUTPUT_FILE")]
     output_file: Option<PathBuf>,
 }
