@@ -1,6 +1,6 @@
-use colored::Colorize;
 use core::fmt::Arguments;
 use rust_cli_quickstart::{error, RustCliQuickStartLog, RustCliQuickStartTool};
+use yansi::Paint;
 
 struct RustCliQuickStartLogger;
 
@@ -15,10 +15,10 @@ impl RustCliQuickStartLog for RustCliQuickStartLogger {
         println!("{}", args);
     }
     fn warning(self: &Self, args: Arguments) {
-        eprintln!("{}", format!("warning: {}", args).yellow());
+        eprintln!("{}", format!("warning: {}", Paint::yellow(args)));
     }
     fn error(self: &Self, args: Arguments) {
-        eprintln!("{}", format!("error: {}", args).red());
+        eprintln!("{}", format!("error: {}", Paint::red(args)));
     }
 }
 

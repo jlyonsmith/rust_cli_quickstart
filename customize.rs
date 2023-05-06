@@ -1,7 +1,7 @@
 #!/usr/bin/env rust-script
 //! ```cargo
 //! [dependencies]
-//! colored = "2.0.0"
+//! yansi = "0.5.1"
 //! str_inflector = "0.12.0"
 //! dialoguer = "0.10.3"
 //! handlebars = "4.3.6"
@@ -9,33 +9,33 @@
 //! duct = "0.13.6"
 //! ```
 
-use colored::*;
 use dialoguer::{Confirm, Input};
 use duct::cmd;
 use handlebars::Handlebars;
 use inflector::Inflector;
 use map_macro::map;
 use std::{env, error::Error, fs, process::ExitCode};
+use yansi::Paint;
 
 trait Logger {
-    fn info(s: &str);
-    fn error(s: &str);
-    fn warning(s: &str);
+    fn info<T: AsRef<str>>(s: T);
+    fn error<T: AsRef<str>>(s: T);
+    fn warning<T: AsRef<str>>(s: T);
 }
 
 struct Customizer {}
 
 impl Logger for Customizer {
-    fn info(s: &str) {
-        println!("👉 {}", s);
+    fn info<T: AsRef<str>>(s: T) {
+        println!("👉 {}", s.as_ref());
     }
 
-    fn error(s: &str) {
-        eprintln!("💥 {}", s.red());
+    fn error<T: AsRef<str>>(s: T) {
+        eprintln!("💥 {}", Paint::red(s.as_ref()));
     }
 
-    fn warning(s: &str) {
-        eprintln!("🐓 {}", s.yellow());
+    fn warning<T: AsRef<str>>(s: T) {
+        eprintln!("🐓 {}", Paint::yellow(s.as_ref()));
     }
 }
 

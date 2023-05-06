@@ -23,6 +23,10 @@ pub struct RustCliQuickStartTool<'a> {
 #[derive(Parser)]
 #[clap(version, about, long_about = None)]
 struct Cli {
+    /// Disable colors in output
+    #[arg(long = "no-color", short = 'n', env = "NO_CLI_COLOR")]
+    no_color: bool,
+
     /// The input file
     #[arg(value_name = "INPUT_FILE")]
     input_file: Option<PathBuf>,
