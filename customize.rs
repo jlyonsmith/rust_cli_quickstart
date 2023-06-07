@@ -13,7 +13,7 @@ use dialoguer::{Confirm, Input};
 use duct::cmd;
 use handlebars::Handlebars;
 use inflector::Inflector;
-use map_macro::map;
+use map_macro::hash_map;
 use std::{env, error::Error, fs, process::ExitCode};
 use yansi::Paint;
 
@@ -115,7 +115,7 @@ impl Customizer {
             &cargo_toml_path,
             &handlebars.render_template(
                 &fs::read_to_string(&cargo_toml_path)?,
-                &map! {
+                &hash_map! {
                     "description" => &description,
                     "firstName" => &first_name,
                     "lastName" => &last_name,
@@ -129,7 +129,7 @@ impl Customizer {
             &read_me_path,
             &handlebars.render_template(
                 &fs::read_to_string(&read_me_path)?,
-                &map! {
+                &hash_map! {
                     "title" => &project_name_title,
                     "alias" => &alias,
                     "projectName" => &project_name_snake,
