@@ -106,7 +106,7 @@ await new Command()
     }
 
     if (await Confirm.prompt("Re-initialize Git repo?")) {
-      Deno.removeSync(".git");
+      Deno.removeSync(".git", { recursive: true });
       await new Deno.Command("git", { args: ["init"] }).spawn().status;
       await new Deno.Command("git", { args: ["add", "-A", ":/"] }).spawn()
         .status;
