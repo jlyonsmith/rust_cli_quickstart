@@ -14,7 +14,7 @@ import {
   Input,
   Confirm,
 } from "https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts";
-import { Karacho } from "https://deno.land/x/karacho/main.ts";
+import { Karacho } from "https://deno.land/x/karacho@v1.0.25/main.ts";
 
 await new Command()
   .name("customize.ts")

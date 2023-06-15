@@ -8,7 +8,7 @@
 
 - [x] Based off of `cargo new`
 - [x] Prompts for [Cargo.toml](./Cargo.toml) details
-- [x] Uses [`clap`]([) for comma](https://crates.io/crates/clap)nd line processing
+- [x] Uses [`clap`](https://crates.io/crates/clap) for command line processing
 - [x] Uses [`colored`](https://crates.io/crates/colored) for messages
 - [x] Includes [`lazy_static`](https://crates.io/crates/lazy_static) just because
 - [x] Adds a [`Justfile`](https://crates.io/crates/just) with shortcuts for releasing
