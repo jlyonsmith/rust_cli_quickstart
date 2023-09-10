@@ -26,3 +26,5 @@
 - [x] Creates a `.vscode/launch.json` file for debugging
 - [x] Includes basic unit tests
 - [x] Includes [Criterion](https://crates.io/crates/criterion) and basic benchmark tests
+
+This software was written by John Lyon-Smith.

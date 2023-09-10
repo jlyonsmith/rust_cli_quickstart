@@ -9,7 +9,6 @@ import {
   paramCase,
   pascalCase,
 } from "https://deno.land/x/case@2.1.1/mod.ts";
-import * as fs from "https://deno.land/std@0.191.0/fs/mod.ts";
 import {
   Input,
   Confirm,
@@ -28,6 +27,9 @@ await new Command()
     }
   })
   .action(async (_options, args) => {
+    const oldProjectNameSnake = "rust_cli_quickstart";
+    const oldProjectNamePascal = "RustCliQuickstart";
+    const oldProjectNameParam = "rust-cli-quickstart";
     const projectName = args;
     const projectNameSnake = snakeCase(projectName);
     const projectNamePascal = pascalCase(projectName);
@@ -41,19 +43,19 @@ await new Command()
     const launchPath = ".vscode/launch.json";
     const readMePath = "README.md";
 
-    fs.moveSync(oldBinPath, binPath);
+    Deno.renameSync(oldBinPath, binPath);
 
     Deno.writeTextFileSync(
       binPath,
       Deno.readTextFileSync(binPath)
-        .replaceAll("rust_cli_quickstart", projectNameSnake)
-        .replaceAll("RustCliQuickStart", projectNamePascal)
+        .replaceAll(oldProjectNameSnake, projectNameSnake)
+        .replaceAll(oldProjectNamePascal, projectNamePascal)
     );
 
     Deno.writeTextFileSync(
       libPath,
       Deno.readTextFileSync(libPath).replaceAll(
-        "RustCliQuickStart",
+        oldProjectNamePascal,
         projectNamePascal
       )
     );
@@ -61,15 +63,15 @@ await new Command()
     Deno.writeTextFileSync(
       benchPath,
       Deno.readTextFileSync(benchPath)
-        .replaceAll("rust_cli_quickstart", projectNameSnake)
-        .replaceAll("RustCliQuickStart", projectNamePascal)
+        .replaceAll(oldProjectNameSnake, projectNameSnake)
+        .replaceAll(oldProjectNamePascal, projectNamePascal)
     );
 
     Deno.writeTextFileSync(
       launchPath,
       Deno.readTextFileSync(launchPath)
-        .replaceAll("rust_cli_quickstart", projectNameSnake)
-        .replaceAll("RustCliQuickStart", projectNamePascal)
+        .replaceAll(oldProjectNameSnake, projectNameSnake)
+        .replaceAll(oldProjectNamePascal, projectNamePascal)
     );
 
     const description = await Input.prompt(
@@ -85,9 +87,9 @@ await new Command()
       cargoTomlPath,
       karacho.compile(
         Deno.readTextFileSync(cargoTomlPath)
-          .replaceAll("rust_cli_quickstart", projectNameSnake)
-          .replaceAll("rust-cli-quickstart", projectNameParam)
-          .replaceAll("RustCliQuickStart", projectNamePascal)
+          .replaceAll(oldProjectNameSnake, projectNameSnake)
+          .replaceAll(oldProjectNameParam, projectNameParam)
+          .replaceAll(oldProjectNamePascal, projectNamePascal)
       )({ description, firstName, lastName, email, alias })
     );
 
