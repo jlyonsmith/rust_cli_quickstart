@@ -36,23 +36,23 @@ await new Command()
     const projectNameTitle = titleCase(projectName);
     const projectNameParam = paramCase(projectName);
     const oldBinPath = "src/bin/rust_cli_quickstart.rs";
-    const binPath = `src/bin/${snakeCase(projectName)}.rs`;
+    const binPath = `src/bin/${projectNameSnake}.rs`;
     const libPath = "src/lib.rs";
     const benchPath = "benches/benchmarks.rs";
     const cargoTomlPath = "Cargo.toml";
     const launchPath = ".vscode/launch.json";
     const readMePath = "README.md";
 
-    Deno.renameSync(oldBinPath, binPath);
+    await Deno.rename(oldBinPath, binPath);
 
-    Deno.writeTextFileSync(
+    await Deno.writeTextFile(
       binPath,
       Deno.readTextFileSync(binPath)
         .replaceAll(oldProjectNameSnake, projectNameSnake)
         .replaceAll(oldProjectNamePascal, projectNamePascal)
     );
 
-    Deno.writeTextFileSync(
+    await Deno.writeTextFile(
       libPath,
       Deno.readTextFileSync(libPath).replaceAll(
         oldProjectNamePascal,
@@ -60,14 +60,14 @@ await new Command()
       )
     );
 
-    Deno.writeTextFileSync(
+    await Deno.writeTextFile(
       benchPath,
       Deno.readTextFileSync(benchPath)
         .replaceAll(oldProjectNameSnake, projectNameSnake)
         .replaceAll(oldProjectNamePascal, projectNamePascal)
     );
 
-    Deno.writeTextFileSync(
+    await Deno.writeTextFile(
       launchPath,
       Deno.readTextFileSync(launchPath)
         .replaceAll(oldProjectNameSnake, projectNameSnake)
@@ -83,7 +83,7 @@ await new Command()
     const alias = await Input.prompt("Enter your GitHub alias");
     const karacho = new Karacho();
 
-    Deno.writeTextFileSync(
+    await Deno.writeTextFile(
       cargoTomlPath,
       karacho.compile(
         Deno.readTextFileSync(cargoTomlPath)
@@ -93,7 +93,7 @@ await new Command()
       )({ description, firstName, lastName, email, alias })
     );
 
-    Deno.writeTextFile(
+    await Deno.writeTextFile(
       readMePath,
       karacho.compile(Deno.readTextFileSync(readMePath))({
         title: projectNameTitle,
