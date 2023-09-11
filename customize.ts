@@ -28,7 +28,7 @@ await new Command()
   })
   .action(async (_options, args) => {
     const oldProjectNameSnake = "rust_cli_quickstart";
-    const oldProjectNamePascal = "RustCliQuickstart";
+    const oldProjectNamePascal = "RustCliQuickStart";
     const oldProjectNameParam = "rust-cli-quickstart";
     const projectName = args;
     const projectNameSnake = snakeCase(projectName);
@@ -52,16 +52,16 @@ await new Command()
     const alias = await Input.prompt("Enter your GitHub alias");
     const karacho = new Karacho();
 
-    await Deno.rename(oldBinPath, binPath);
+    Deno.renameSync(oldBinPath, binPath);
 
-    await Deno.writeTextFile(
+    Deno.writeTextFileSync(
       binPath,
       Deno.readTextFileSync(binPath)
         .replaceAll(oldProjectNameSnake, projectNameSnake)
         .replaceAll(oldProjectNamePascal, projectNamePascal)
     );
 
-    await Deno.writeTextFile(
+    Deno.writeTextFileSync(
       libPath,
       Deno.readTextFileSync(libPath).replaceAll(
         oldProjectNamePascal,
@@ -69,21 +69,21 @@ await new Command()
       )
     );
 
-    await Deno.writeTextFile(
+    Deno.writeTextFileSync(
       benchPath,
       Deno.readTextFileSync(benchPath)
         .replaceAll(oldProjectNameSnake, projectNameSnake)
         .replaceAll(oldProjectNamePascal, projectNamePascal)
     );
 
-    await Deno.writeTextFile(
+    Deno.writeTextFileSync(
       launchPath,
       Deno.readTextFileSync(launchPath)
         .replaceAll(oldProjectNameSnake, projectNameSnake)
         .replaceAll(oldProjectNamePascal, projectNamePascal)
     );
 
-    await Deno.writeTextFile(
+    Deno.writeTextFileSync(
       cargoTomlPath,
       karacho.compile(
         Deno.readTextFileSync(cargoTomlPath)
@@ -93,7 +93,7 @@ await new Command()
       )({ description, firstName, lastName, email, alias })
     );
 
-    await Deno.writeTextFile(
+    Deno.writeTextFileSync(
       readMePath,
       karacho.compile(Deno.readTextFileSync(readMePath))({
         title: projectNameTitle,
