@@ -43,6 +43,15 @@ await new Command()
     const launchPath = ".vscode/launch.json";
     const readMePath = "README.md";
 
+    const description = await Input.prompt(
+      "Enter the description for the project"
+    );
+    const firstName = await Input.prompt("Enter your first name");
+    const lastName = await Input.prompt("Enter your last name");
+    const email = await Input.prompt("Enter your email");
+    const alias = await Input.prompt("Enter your GitHub alias");
+    const karacho = new Karacho();
+
     await Deno.rename(oldBinPath, binPath);
 
     await Deno.writeTextFile(
@@ -73,15 +82,6 @@ await new Command()
         .replaceAll(oldProjectNameSnake, projectNameSnake)
         .replaceAll(oldProjectNamePascal, projectNamePascal)
     );
-
-    const description = await Input.prompt(
-      "Enter the description for the project"
-    );
-    const firstName = await Input.prompt("Enter your first name");
-    const lastName = await Input.prompt("Enter your last name");
-    const email = await Input.prompt("Enter your email");
-    const alias = await Input.prompt("Enter your GitHub alias");
-    const karacho = new Karacho();
 
     await Deno.writeTextFile(
       cargoTomlPath,
@@ -116,5 +116,7 @@ await new Command()
         args: ["commit", "-m", "Initial commit"],
       }).spawn().status;
     }
+
+    console.info("Customization complete");
   })
   .parse(Deno.args);
