@@ -1,10 +1,6 @@
-# {{title}}
+# Rust Quickstart Template
 
-[![coverage](https://shields.io/endpoint?url=https://raw.githubusercontent.com/{{alias}}/{{projectName}}/main/coverage.json)](https://github.com/{{alias}}/{{projectName}}/blob/main/coverage.json)
-[![Crates.io](https://img.shields.io/crates/v/{{projectName}}.svg)](https://crates.io/crates/{{projectName}})
-[![Docs.rs](https://docs.rs/{{projectName}}/badge.svg)](https://docs.rs/{{projectName}})
-
-{{description}}
+This is a Rust `quickstart` template for use with the [`git_extra`](https://github.com/jlyonsmith/git_extra_rs) tool.
 
 - [x] Based off of `cargo new`
 - [x] Prompts for [Cargo.toml](./Cargo.toml) details
@@ -26,5 +22,3 @@
 - [x] Creates a `.vscode/launch.json` file for debugging
 - [x] Includes basic unit tests
 - [x] Includes [Criterion](https://crates.io/crates/criterion) and basic benchmark tests
-
-This software was written by John Lyon-Smith.

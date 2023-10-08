@@ -41,6 +41,7 @@ await new Command()
     const benchPath = "benches/benchmarks.rs";
     const cargoTomlPath = "Cargo.toml";
     const launchPath = ".vscode/launch.json";
+    const readMeTemplatePath = "README.md.template";
     const readMePath = "README.md";
 
     const description = await Input.prompt(
@@ -93,6 +94,8 @@ await new Command()
       )({ description, firstName, lastName, email, alias })
     );
 
+    Deno.removeSync(readMePath);
+    Deno.renameSync(readMeTemplatePath, readMePath);
     Deno.writeTextFileSync(
       readMePath,
       karacho.compile(Deno.readTextFileSync(readMePath))({
