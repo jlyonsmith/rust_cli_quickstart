@@ -1,8 +1,8 @@
 mod log_macros;
 
+use anyhow::Context;
 use clap::Parser;
 use core::fmt::Arguments;
-use easy_error::{self, ResultExt};
 use std::{
     error::Error,
     fs::File,
@@ -37,25 +37,23 @@ struct Cli {
 }
 
 impl Cli {
-    fn get_output(&self) -> Result<Box<dyn Write>, Box<dyn Error>> {
+    fn get_output(&self) -> anyhow::Result<Box<dyn Write>> {
         match self.output_file {
             Some(ref path) => File::create(path)
                 .context(format!(
                     "Unable to create file '{}'",
                     path.to_string_lossy()
                 ))
-                .map(|f| Box::new(f) as Box<dyn Write>)
-                .map_err(|e| Box::new(e) as Box<dyn Error>),
+                .map(|f| Box::new(f) as Box<dyn Write>),
             None => Ok(Box::new(io::stdout())),
         }
     }
 
-    fn get_input(&self) -> Result<Box<dyn Read>, Box<dyn Error>> {
+    fn get_input(&self) -> anyhow::Result<Box<dyn Read>> {
         match self.input_file {
             Some(ref path) => File::open(path)
                 .context(format!("Unable to open file '{}'", path.to_string_lossy()))
-                .map(|f| Box::new(f) as Box<dyn Read>)
-                .map_err(|e| Box::new(e) as Box<dyn Error>),
+                .map(|f| Box::new(f) as Box<dyn Read>),
             None => Ok(Box::new(io::stdin())),
         }
     }
