@@ -7,16 +7,11 @@
     {
       "type": "lldb",
       "request": "launch",
-      "name": "Debug unit tests in library 'new_project'",
+      "name": "Debug unit tests in library 'rust_cli_quickstart'",
       "cargo": {
-        "args": [
-          "test",
-          "--no-run",
-          "--lib",
-          "--package=new_project"
-        ],
+        "args": ["test", "--no-run", "--lib", "--package=rust_cli_quickstart"],
         "filter": {
-          "name": "new_project",
+          "name": "rust_cli_quickstart",
           "kind": "lib"
         }
       },
@@ -31,17 +26,15 @@
         "args": [
           "build",
           "--bin=rust-cli-quickstart",
-          "--package=new_project"
+          "--package=rust_cli_quickstart"
         ],
         "filter": {
           "name": "rust-cli-quickstart",
           "kind": "bin"
         }
       },
-      "args": [
-        "--help",
-      ],
+      "args": ["--help"],
       "cwd": "${workspaceFolder}"
-    },
+    }
   ]
 }

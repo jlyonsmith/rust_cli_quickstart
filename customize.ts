@@ -41,7 +41,8 @@ await new Command()
     const benchPath = "benches/benchmarks.rs";
     const cargoTomlPath = "Cargo.toml";
     const launchPath = ".vscode/launch.json";
-    const readMeTemplatePath = "README.md.template";
+    const launchTemplatePath = ".vscode/launch.template.json";
+    const readMeTemplatePath = "README.template.md";
     const readMePath = "README.md";
 
     const description = await Input.prompt(
@@ -77,6 +78,8 @@ await new Command()
         .replaceAll(oldProjectNamePascal, projectNamePascal)
     );
 
+    Deno.removeSync(launchPath);
+    Deno.renameSync(launchTemplatePath, launchPath);
     Deno.writeTextFileSync(
       launchPath,
       Deno.readTextFileSync(launchPath)
