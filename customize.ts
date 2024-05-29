@@ -84,7 +84,7 @@ await new Command()
       launchPath,
       Deno.readTextFileSync(launchPath)
         .replaceAll(oldProjectNameSnake, projectNameSnake)
-        .replaceAll(oldProjectNamePascal, projectNamePascal)
+        .replaceAll(oldProjectNameParam, projectNameParam)
     );
 
     Deno.writeTextFileSync(
