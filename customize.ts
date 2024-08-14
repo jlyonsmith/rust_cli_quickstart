@@ -113,6 +113,8 @@ await new Command()
       Deno.removeSync("customize.ts");
     }
 
+    await new Deno.Command("cargo", { args: ["build"] }).spawn().status;
+
     if (await Confirm.prompt("Re-initialize Git repo?")) {
       Deno.removeSync(".git", { recursive: true });
       await new Deno.Command("git", { args: ["init"] }).spawn().status;
