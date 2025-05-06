@@ -60,7 +60,7 @@ impl Cli {
 }
 
 impl<'a> RustCliQuickStartTool<'a> {
-    pub fn new(log: &'a dyn RustCliQuickStartLog) -> RustCliQuickStartTool {
+    pub fn new(log: &'a dyn RustCliQuickStartLog) -> RustCliQuickStartTool<'a> {
         RustCliQuickStartTool { log }
     }
 
