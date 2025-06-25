@@ -14,8 +14,8 @@ license = "Unlicense"
 anyhow = "1.0.86"
 clap = { version = "4.5", features = ["derive", "env"] }
 lazy_static = "1.5"
+termion = "4.0.5"
 thiserror = "2.0"
-yansi = "1.0"
 
 [dev-dependencies]
 criterion = "^0.5"
