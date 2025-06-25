@@ -4,15 +4,12 @@ import {
   ValidationError,
 } from "https://deno.land/x/cliffy@v0.25.7/command/mod.ts";
 import {
-  snakeCase,
-  titleCase,
   paramCase,
   pascalCase,
+  snakeCase,
+  titleCase,
 } from "https://deno.land/x/case@2.1.1/mod.ts";
-import {
-  Input,
-  Confirm,
-} from "https://deno.land/x/cliffy@v0.25.7/prompt/mod.ts";
+import { Confirm, Input } from "prompt";
 import { Karacho } from "https://deno.land/x/karacho@v1.0.25/main.ts";
 
 await new Command()
@@ -40,13 +37,12 @@ await new Command()
     const libPath = "src/lib.rs";
     const benchPath = "benches/benchmarks.rs";
     const cargoTomlPath = "Cargo.toml";
-    const launchPath = ".vscode/launch.json";
-    const launchTemplatePath = ".vscode/launch.template.json";
+    const debugPath = ".zed/debug.json";
     const readMeTemplatePath = "README.template.md";
     const readMePath = "README.md";
 
     const description = await Input.prompt(
-      "Enter the description for the project"
+      "Enter the description for the project",
     );
     const firstName = await Input.prompt("Enter your first name");
     const lastName = await Input.prompt("Enter your last name");
@@ -60,31 +56,29 @@ await new Command()
       binPath,
       Deno.readTextFileSync(binPath)
         .replaceAll(oldProjectNameSnake, projectNameSnake)
-        .replaceAll(oldProjectNamePascal, projectNamePascal)
+        .replaceAll(oldProjectNamePascal, projectNamePascal),
     );
 
     Deno.writeTextFileSync(
       libPath,
       Deno.readTextFileSync(libPath).replaceAll(
         oldProjectNamePascal,
-        projectNamePascal
-      )
+        projectNamePascal,
+      ),
     );
 
     Deno.writeTextFileSync(
       benchPath,
       Deno.readTextFileSync(benchPath)
         .replaceAll(oldProjectNameSnake, projectNameSnake)
-        .replaceAll(oldProjectNamePascal, projectNamePascal)
+        .replaceAll(oldProjectNamePascal, projectNamePascal),
     );
 
-    Deno.removeSync(launchPath);
-    Deno.renameSync(launchTemplatePath, launchPath);
     Deno.writeTextFileSync(
-      launchPath,
-      Deno.readTextFileSync(launchPath)
+      debugPath,
+      Deno.readTextFileSync(debugPath)
         .replaceAll(oldProjectNameSnake, projectNameSnake)
-        .replaceAll(oldProjectNameParam, projectNameParam)
+        .replaceAll(oldProjectNameParam, projectNameParam),
     );
 
     Deno.writeTextFileSync(
@@ -93,8 +87,8 @@ await new Command()
         Deno.readTextFileSync(cargoTomlPath)
           .replaceAll(oldProjectNameSnake, projectNameSnake)
           .replaceAll(oldProjectNameParam, projectNameParam)
-          .replaceAll(oldProjectNamePascal, projectNamePascal)
-      )({ description, firstName, lastName, email, alias })
+          .replaceAll(oldProjectNamePascal, projectNamePascal),
+      )({ description, firstName, lastName, email, alias }),
     );
 
     Deno.removeSync(readMePath);
@@ -106,7 +100,7 @@ await new Command()
         alias,
         projectName: projectNameSnake,
         description,
-      })
+      }),
     );
 
     if (await Confirm.prompt("Delete customization scripts?")) {

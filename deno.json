@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "prompt": "npm:prompt@^1.3.0"
+  }
+}
