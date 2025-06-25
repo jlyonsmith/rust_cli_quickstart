@@ -1,15 +1,7 @@
 #!/usr/bin/env -S deno run --allow-run --allow-read --allow-write
-import {
-  Command,
-  ValidationError,
-} from "https://deno.land/x/cliffy@v0.25.7/command/mod.ts";
-import {
-  paramCase,
-  pascalCase,
-  snakeCase,
-  titleCase,
-} from "https://deno.land/x/case@2.1.1/mod.ts";
-import { Confirm, Input } from "prompt";
+import { Command, ValidationError } from "@cliffy/command";
+import { paramCase, pascalCase, snakeCase, titleCase } from "@wok/case";
+import { Confirm, Input } from "@cliffy/prompt";
 import { Karacho } from "https://deno.land/x/karacho@v1.0.25/main.ts";
 
 await new Command()
