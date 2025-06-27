@@ -5,13 +5,8 @@
     "@wok/case": "jsr:@wok/case@^1.0.2"
   },
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
     "lib": ["deno.ns", "dom", "esnext"],
     "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false
   }
 }
