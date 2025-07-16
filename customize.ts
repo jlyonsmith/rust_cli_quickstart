@@ -97,6 +97,8 @@ await new Command()
 
     if (await Confirm.prompt("Delete customization scripts?")) {
       Deno.removeSync("customize.ts");
+      Deno.removeSync("deno.lock");
+      Deno.removeSync("deno.json");
     }
 
     await new Deno.Command("cargo", { args: ["build"] }).spawn().status;
