@@ -4,7 +4,6 @@ use anyhow::Context;
 use clap::Parser;
 use core::fmt::Arguments;
 use std::{
-    error::Error,
     fs::File,
     io::{self, Read, Write},
     path::PathBuf,
@@ -67,7 +66,7 @@ impl<'a> RustCliQuickStartTool<'a> {
     pub fn run(
         self: &mut Self,
         args: impl IntoIterator<Item = std::ffi::OsString>,
-    ) -> Result<(), Box<dyn Error>> {
+    ) -> anyhow::Result<()> {
         let cli = match Cli::try_parse_from(args) {
             Ok(m) => m,
             Err(err) => {
